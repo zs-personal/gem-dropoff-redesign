@@ -7,7 +7,7 @@ import CenterMap from "./CenterMap";
 import { Search } from "./Icons";
 import { Button, SectionHead, cx } from "./ui";
 
-const PAGE = 15;
+const PAGE = 10;
 
 interface Props {
   t: Copy;
@@ -176,8 +176,8 @@ export default function Directory({
 
                 {remaining > 0 && (
                   <div className="mt-8 flex flex-col items-center gap-2.5">
-                    <Button variant="outline" onClick={() => setVisible((v) => v + PAGE * 2)}>
-                      {t.directory.more(Math.min(PAGE * 2, remaining))}
+                    <Button variant="outline" onClick={() => setVisible((v) => v + PAGE)}>
+                      {t.directory.more(Math.min(PAGE, remaining))}
                     </Button>
                     <span className="text-[12px] text-slate-faint">
                       {t.directory.showing(shown.length, centers.length)}
