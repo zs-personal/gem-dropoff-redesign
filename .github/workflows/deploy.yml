@@ -20,15 +20,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # npm 10 (bundled with Node 20) hangs here indefinitely and dies with
+      # "Exit handler never called!"; Node 24 ships npm 11, where that is fixed
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
-      # audit/funding metadata calls have hung this step for 8+ minutes before
-      # dying with npm's "Exit handler never called!" bug, leaving a partial tree
       - run: npm ci --no-audit --no-fund
-        timeout-minutes: 4
+        timeout-minutes: 5
 
       - run: npm run build
         env:
