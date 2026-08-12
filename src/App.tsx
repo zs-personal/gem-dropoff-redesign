@@ -174,6 +174,8 @@ export default function App() {
       {welcomeOpen && (
         <WelcomeModal
           t={t}
+          lang={lang}
+          onLang={setLang}
           locating={locating}
           onZipSubmit={handleZip}
           onUseLocation={handleLocate}

@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import type { Copy } from "../copy";
+import type { Lang } from "../types";
 import { DONATE_URL } from "../config";
 import { asset } from "../lib/asset";
-import { Button, ButtonLink } from "./ui";
+import { Button, ButtonLink, LangToggle } from "./ui";
 
 interface Props {
   t: Copy;
+  lang: Lang;
+  onLang: (lang: Lang) => void;
   locating: boolean;
   onZipSubmit: (zip: string) => Promise<boolean>;
   onUseLocation: () => void;
@@ -14,7 +17,7 @@ interface Props {
 
 const FOCUSABLE = 'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-export default function WelcomeModal({ t, locating, onZipSubmit, onUseLocation, onClose }: Props) {
+export default function WelcomeModal({ t, lang, onLang, locating, onZipSubmit, onUseLocation, onClose }: Props) {
   const [zip, setZip] = useState("");
   const [error, setError] = useState<string | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -100,15 +103,18 @@ export default function WelcomeModal({ t, locating, onZipSubmit, onUseLocation, 
             alt="Global Empowerment Mission"
             className="absolute left-6 top-1/2 h-6 w-auto -translate-y-1/2 invert sm:h-7"
           />
-          <button
-            onClick={onClose}
-            aria-label={t.welcome.close}
-            className="absolute right-4 top-4 grid size-8 place-items-center rounded-[3px] bg-white/15 text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-ink"
-          >
-            <svg viewBox="0 0 24 24" className="size-4" fill="none" aria-hidden="true">
-              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-          </button>
+          <div className="absolute right-4 top-4 flex items-center gap-2">
+            <LangToggle lang={lang} onLang={onLang} label={t.langLabel} tone="dark" />
+            <button
+              onClick={onClose}
+              aria-label={t.welcome.close}
+              className="grid size-8 shrink-0 place-items-center rounded-[3px] bg-white/15 text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-ink"
+            >
+              <svg viewBox="0 0 24 24" className="size-4" fill="none" aria-hidden="true">
+                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         <div className="p-6 sm:p-8">

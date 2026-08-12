@@ -3,7 +3,7 @@ import type { Copy } from "../copy";
 import type { Lang } from "../types";
 import { DONATE_URL } from "../config";
 import { asset } from "../lib/asset";
-import { Button, ButtonLink, StatusDot, cx } from "./ui";
+import { Button, ButtonLink, LangToggle, StatusDot, cx } from "./ui";
 
 interface Props {
   t: Copy;
@@ -76,21 +76,7 @@ export default function Header({ t, lang, onLang, receiving }: Props) {
             {t.live(receiving)}
           </span>
 
-          <div className="flex items-center rounded-[3px] border border-hairline">
-            {(["es", "en"] as const).map((option) => (
-              <button
-                key={option}
-                onClick={() => onLang(option)}
-                aria-pressed={lang === option}
-                className={cx(
-                  "label-xs px-2.5 py-1.5 transition-colors",
-                  lang === option ? "bg-ink text-white" : "text-slate-faint hover:text-ink",
-                )}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
+          <LangToggle lang={lang} onLang={onLang} label={t.langLabel} />
 
           <span className="hidden sm:block">
             <Button

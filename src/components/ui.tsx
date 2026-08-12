@@ -46,6 +46,53 @@ export function ButtonLink({
   return <a target="_blank" rel="noopener noreferrer" {...rest} className={buttonClass(variant, size, className)} />;
 }
 
+export function LangToggle({
+  lang,
+  onLang,
+  label,
+  tone = "light",
+}: {
+  lang: "es" | "en";
+  onLang: (lang: "es" | "en") => void;
+  label: string;
+  tone?: "light" | "dark";
+}) {
+  return (
+    <div
+      role="group"
+      aria-label={label}
+      className={cx(
+        "flex shrink-0 items-center rounded-[3px] border",
+        tone === "light" ? "border-hairline" : "border-white/25 backdrop-blur-sm",
+      )}
+    >
+      {(["es", "en"] as const).map((option) => {
+        const on = lang === option;
+        return (
+          <button
+            key={option}
+            type="button"
+            onClick={() => onLang(option)}
+            aria-pressed={on}
+            className={cx(
+              "label-xs px-2.5 py-1.5 transition-colors",
+              tone === "light"
+                ? on
+                  ? "bg-ink text-white"
+                  : "text-slate-faint hover:text-ink"
+                : on
+                  ? "bg-white text-ink"
+                  : "text-white/60 hover:text-white",
+            )}
+          >
+            {option}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 export function StatusDot({ status, pulse = false }: { status: "receiving" | "full"; pulse?: boolean }) {
   return (
     <span

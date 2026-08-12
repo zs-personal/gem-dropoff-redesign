@@ -12,6 +12,7 @@ const es = {
     donate: "Donar",
   },
   live: (n: number) => `${n} recibiendo ahora`,
+  langLabel: "Idioma",
 
   hero: {
     badge: "Misiones activas",
@@ -228,6 +229,7 @@ const en: typeof es = {
     donate: "Donate",
   },
   live: (n: number) => `${n} receiving now`,
+  langLabel: "Language",
 
   hero: {
     badge: "Active missions",
