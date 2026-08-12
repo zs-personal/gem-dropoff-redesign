@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import type { Copy } from "../copy";
+import { DONATE_URL } from "../config";
 import { asset } from "../lib/asset";
-import { Button } from "./ui";
+import { Button, ButtonLink } from "./ui";
 
 interface Props {
   t: Copy;
@@ -173,6 +174,16 @@ export default function WelcomeModal({ t, locating, onZipSubmit, onUseLocation, 
             <Button variant="ink" size="md" className="mt-3.5 w-full" onClick={handleRegister}>
               {t.welcome.register.action}
             </Button>
+          </div>
+
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-hairline pt-5">
+            <h3 className="font-display text-[13.5px] font-bold uppercase tracking-wide text-ink">
+              {t.welcome.give.title}
+            </h3>
+            <ButtonLink href={DONATE_URL} size="sm" onClick={onClose}>
+              {t.welcome.give.action}
+              <span aria-hidden="true">↗</span>
+            </ButtonLink>
           </div>
 
           <button

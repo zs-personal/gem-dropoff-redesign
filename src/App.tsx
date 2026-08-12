@@ -13,6 +13,7 @@ import HowItWorks from "./components/HowItWorks";
 import ImpactBand from "./components/ImpactBand";
 import Directory from "./components/Directory";
 import WhatToDonate from "./components/WhatToDonate";
+import Give from "./components/Give";
 import Register from "./components/Register";
 import Footer from "./components/Footer";
 import WelcomeModal from "./components/WelcomeModal";
@@ -171,6 +172,7 @@ export default function App() {
           }}
         />
         <WhatToDonate t={t} />
+        <Give t={t} />
         <Register t={t} />
       </main>
       <Footer t={t} total={STATS.total} />

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import type { Copy } from "../copy";
 import type { Lang } from "../types";
+import { DONATE_URL } from "../config";
 import { asset } from "../lib/asset";
-import { Button, StatusDot, cx } from "./ui";
+import { Button, ButtonLink, StatusDot, cx } from "./ui";
 
 interface Props {
   t: Copy;
@@ -49,27 +50,28 @@ export default function Header({ t, lang, onLang, receiving }: Props) {
           />
         </a>
 
-        <span className="ml-1 hidden h-8 w-px bg-hairline lg:block" />
+        <span className="ml-1 hidden h-8 w-px bg-hairline xl:block" />
 
-        <span className="hidden leading-tight lg:block">
+        <span className="hidden whitespace-nowrap leading-tight xl:block">
           <span className="label-xs block text-ink">{t.brand}</span>
           <span className="mt-0.5 block text-[11px] text-slate-faint">{t.brandSub}</span>
         </span>
 
-        <nav className="ml-auto hidden items-center gap-1 lg:flex">
+        <nav className="ml-auto hidden items-center gap-0.5 lg:flex">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="label-xs rounded-[3px] px-3 py-2.5 text-slate-ink transition-colors hover:bg-bone hover:text-ink"
+              className="label-xs whitespace-nowrap rounded-[3px] px-2.5 py-2.5 text-slate-ink transition-colors hover:bg-bone hover:text-ink"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-2.5 lg:ml-4">
-          <span className="hidden items-center gap-2 rounded-full bg-open-wash px-3 py-1.5 text-[11px] font-semibold text-open md:inline-flex">
+        <div className="ml-auto flex items-center gap-2.5 lg:ml-3">
+          {/* above lg the nav needs the room, and the ticker below carries the same live count */}
+          <span className="hidden items-center gap-2 whitespace-nowrap rounded-full bg-open-wash px-3 py-1.5 text-[11px] font-semibold text-open md:inline-flex lg:hidden">
             <StatusDot status="receiving" pulse />
             {t.live(receiving)}
           </span>
@@ -92,12 +94,17 @@ export default function Header({ t, lang, onLang, receiving }: Props) {
 
           <span className="hidden sm:block">
             <Button
+              variant="outline"
               size="sm"
               onClick={() => document.getElementById("registrar")?.scrollIntoView({ behavior: "smooth" })}
             >
               {t.nav.register}
             </Button>
           </span>
+
+          <ButtonLink href={DONATE_URL} size="sm">
+            {t.nav.donate}
+          </ButtonLink>
         </div>
       </div>
     </header>

@@ -1,5 +1,7 @@
 import type { Copy } from "../copy";
+import { DONATE_URL } from "../config";
 import { asset } from "../lib/asset";
+import { ButtonLink } from "./ui";
 
 export default function Footer({ t, total }: { t: Copy; total: number }) {
   return (
@@ -15,6 +17,10 @@ export default function Footer({ t, total }: { t: Copy; total: number }) {
               loading="lazy"
             />
             <p className="mt-5 text-[13.5px] leading-relaxed text-white/55">{t.footer.tagline}</p>
+            <ButtonLink href={DONATE_URL} size="md" className="mt-6">
+              {t.footer.give}
+              <span aria-hidden="true">↗</span>
+            </ButtonLink>
           </div>
 
           <div className="max-w-xs">

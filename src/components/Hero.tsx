@@ -3,8 +3,9 @@ import type { Copy } from "../copy";
 import type { Lang } from "../types";
 import { missions } from "../data/missions";
 import { useReveal } from "../hooks/useReveal";
+import { DONATE_URL } from "../config";
 import { asset } from "../lib/asset";
-import { Button, cx } from "./ui";
+import { Button, ButtonLink, cx } from "./ui";
 
 interface Props {
   t: Copy;
@@ -119,9 +120,15 @@ export default function Hero({ t, lang, locating, error, originLabel, onZipSubmi
           </form>
 
           <div
-            className="reveal mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px]"
+            className="reveal mt-4 flex flex-wrap items-center gap-x-5 gap-y-3 text-[13px]"
             style={{ ["--d" as string]: "660ms" }}
           >
+            <ButtonLink href={DONATE_URL} size="sm">
+              {t.hero.give}
+            </ButtonLink>
+
+            <span aria-hidden="true" className="hidden h-5 w-px bg-white/20 sm:block" />
+
             <button
               onClick={onUseLocation}
               disabled={locating}

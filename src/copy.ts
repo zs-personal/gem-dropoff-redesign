@@ -3,7 +3,14 @@ import type { Lang } from "./types";
 const es = {
   brand: "Red de acopio",
   brandSub: "Sur de Florida",
-  nav: { find: "Centros", missions: "Misiones", how: "Cómo funciona", what: "Qué donar", register: "Registrar centro" },
+  nav: {
+    find: "Centros",
+    missions: "Misiones",
+    how: "Cómo funciona",
+    what: "Qué donar",
+    register: "Registrar centro",
+    donate: "Donar",
+  },
   live: (n: number) => `${n} recibiendo ahora`,
 
   hero: {
@@ -19,6 +26,20 @@ const es = {
     geoError: "No pudimos obtener tu ubicación. Escribe tu código postal.",
     zipError: "No reconocemos ese código postal. Intenta con otro.",
     scroll: "Desliza",
+    give: "Donar dinero",
+  },
+
+  give: {
+    eyebrow: "Donar dinero",
+    title: "También puedes donar dinero",
+    lede: "Con dinero, GEM compra exactamente lo que falta y lo mueve con sus propios equipos. Puedes destinar tu donación a una misión específica.",
+    stat: "97%",
+    statLabel: "de cada donación va directo a la ayuda",
+    overhead: "3% de gastos administrativos al año",
+    funds: ["Venezuela · Terremotos", "Colombia · Terremoto", "Kits para familias", "Tarjetas BStrong"],
+    action: "Donar a GEM",
+    secure: "Pago seguro en give.gem.org",
+    note: "Deducible de impuestos · 501(c)(3) · EIN 45-3782061",
   },
 
   welcome: {
@@ -35,6 +56,10 @@ const es = {
       title: "Tengo un local que puede recibir",
       body: "Regístralo y te enviamos donantes. Tú controlas el horario.",
       action: "Registrar mi centro",
+    },
+    give: {
+      title: "Prefiero donar dinero",
+      action: "Donar",
     },
     dismiss: "Solo estoy explorando",
     close: "Cerrar",
@@ -187,13 +212,21 @@ const es = {
       "Propuesta de dirección visual construida sobre los datos reales de la red de centros de acopio. No es un sitio oficial de GEM.",
     dataNote: (n: number) => `${n} centros tomados del directorio existente.`,
     rights: "Hecho con cariño por voluntarios.",
+    give: "Donar a GEM",
   },
 };
 
 const en: typeof es = {
   brand: "Drop-off network",
   brandSub: "South Florida",
-  nav: { find: "Centers", missions: "Missions", how: "How it works", what: "What to donate", register: "Register center" },
+  nav: {
+    find: "Centers",
+    missions: "Missions",
+    how: "How it works",
+    what: "What to donate",
+    register: "Register center",
+    donate: "Donate",
+  },
   live: (n: number) => `${n} receiving now`,
 
   hero: {
@@ -209,6 +242,20 @@ const en: typeof es = {
     geoError: "We couldn't get your location. Enter your ZIP code instead.",
     zipError: "We don't recognize that ZIP code. Try another one.",
     scroll: "Scroll",
+    give: "Donate money",
+  },
+
+  give: {
+    eyebrow: "Donate money",
+    title: "You can also give money",
+    lede: "Money lets GEM buy exactly what's missing and move it with its own teams. You can direct your gift to a specific mission.",
+    stat: "97%",
+    statLabel: "of every donation goes straight to aid",
+    overhead: "3% average annual overhead",
+    funds: ["Venezuela · Earthquakes", "Colombia · Earthquake", "Family necessity kits", "BStrong cash cards"],
+    action: "Donate to GEM",
+    secure: "Secure checkout on give.gem.org",
+    note: "Tax-deductible · 501(c)(3) · EIN 45-3782061",
   },
 
   welcome: {
@@ -225,6 +272,10 @@ const en: typeof es = {
       title: "I have a space that can receive",
       body: "Register it and we'll send donors your way. You control the hours.",
       action: "Register my center",
+    },
+    give: {
+      title: "I'd rather give money",
+      action: "Donate",
     },
     dismiss: "I'm just browsing",
     close: "Close",
@@ -377,6 +428,7 @@ const en: typeof es = {
       "A visual direction proposal built on the real drop-off network data. Not an official GEM site.",
     dataNote: (n: number) => `${n} centers sourced from the existing directory.`,
     rights: "Made with care by volunteers.",
+    give: "Donate to GEM",
   },
 };
 

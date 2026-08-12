@@ -1,17 +1,16 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 
 export const cx = (...parts: (string | false | null | undefined)[]) => parts.filter(Boolean).join(" ");
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "orange" | "ink" | "outline" | "onDark";
-  size?: "sm" | "md" | "lg";
-};
+type Variant = "orange" | "ink" | "outline" | "onDark" | "donate";
+type Size = "sm" | "md" | "lg";
 
 const variants = {
   orange: "bg-orange text-white hover:bg-orange-deep",
   ink: "bg-ink text-white hover:bg-ink-3",
   outline: "border border-ink/25 text-ink hover:border-ink hover:bg-ink hover:text-white",
   onDark: "border border-white/30 text-white hover:bg-white hover:text-ink",
+  donate: "bg-alert text-white hover:bg-alert-deep",
 } as const;
 
 const sizes = {
@@ -20,18 +19,31 @@ const sizes = {
   lg: "px-8 py-4 text-[13px]",
 } as const;
 
-export function Button({ variant = "orange", size = "md", className, ...rest }: ButtonProps) {
-  return (
-    <button
-      {...rest}
-      className={cx(
-        "inline-flex shrink-0 items-center justify-center gap-2 rounded-[3px] font-display font-semibold uppercase tracking-[0.14em] transition-all duration-200 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50",
-        sizes[size],
-        variants[variant],
-        className,
-      )}
-    />
+const buttonClass = (variant: Variant, size: Size, className?: string) =>
+  cx(
+    "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-[3px] font-display font-semibold uppercase tracking-[0.14em] transition-all duration-200 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50",
+    sizes[size],
+    variants[variant],
+    className,
   );
+
+export function Button({
+  variant = "orange",
+  size = "md",
+  className,
+  ...rest
+}: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: Variant; size?: Size }) {
+  return <button {...rest} className={buttonClass(variant, size, className)} />;
+}
+
+/** Same styling as Button, for destinations off the page. */
+export function ButtonLink({
+  variant = "donate",
+  size = "md",
+  className,
+  ...rest
+}: AnchorHTMLAttributes<HTMLAnchorElement> & { variant?: Variant; size?: Size }) {
+  return <a target="_blank" rel="noopener noreferrer" {...rest} className={buttonClass(variant, size, className)} />;
 }
 
 export function StatusDot({ status, pulse = false }: { status: "receiving" | "full"; pulse?: boolean }) {
