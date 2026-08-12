@@ -21,6 +21,25 @@ const es = {
     scroll: "Desliza",
   },
 
+  welcome: {
+    kicker: "GEM · Red de acopio",
+    title: "¿Cómo quieres empezar?",
+    lede: "Dos caminos: dejar una donación o abrir tu local como punto de acopio.",
+    donate: {
+      title: "Quiero dejar una donación",
+      body: "Pon tu código postal y te mostramos los centros más cercanos que están recibiendo ahora.",
+      submit: "Buscar",
+    },
+    or: "o",
+    register: {
+      title: "Tengo un local que puede recibir",
+      body: "Regístralo y te enviamos donantes. Tú controlas el horario.",
+      action: "Registrar mi centro",
+    },
+    dismiss: "Solo estoy explorando",
+    close: "Cerrar",
+  },
+
   ticker: [
     "Venezuela · Terremotos 2026",
     "Colombia · Terremoto 2026",
@@ -190,6 +209,25 @@ const en: typeof es = {
     geoError: "We couldn't get your location. Enter your ZIP code instead.",
     zipError: "We don't recognize that ZIP code. Try another one.",
     scroll: "Scroll",
+  },
+
+  welcome: {
+    kicker: "GEM · Drop-off network",
+    title: "Where would you like to start?",
+    lede: "Two paths: drop off a donation, or open your space as a collection point.",
+    donate: {
+      title: "I want to drop off a donation",
+      body: "Enter your ZIP code and we'll show you the closest centers receiving right now.",
+      submit: "Search",
+    },
+    or: "or",
+    register: {
+      title: "I have a space that can receive",
+      body: "Register it and we'll send donors your way. You control the hours.",
+      action: "Register my center",
+    },
+    dismiss: "I'm just browsing",
+    close: "Close",
   },
 
   ticker: [

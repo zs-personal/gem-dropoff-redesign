@@ -15,8 +15,11 @@ import Directory from "./components/Directory";
 import WhatToDonate from "./components/WhatToDonate";
 import Register from "./components/Register";
 import Footer from "./components/Footer";
+import WelcomeModal from "./components/WelcomeModal";
 
 const centers = centersData as Center[];
+
+const WELCOME_KEY = "gem-welcome-seen";
 
 const STATS = {
   total: centers.length,
@@ -35,8 +38,22 @@ export default function App() {
   const [sort, setSort] = useState<Sort>("name");
   const [locating, setLocating] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [welcomeOpen, setWelcomeOpen] = useState(false);
 
   const t = copy[lang];
+
+  // First visit gets an intent prompt. `?welcome=1` forces it back for demos.
+  useEffect(() => {
+    const forced = new URLSearchParams(window.location.search).get("welcome") === "1";
+    if (!forced && localStorage.getItem(WELCOME_KEY)) return;
+    const timer = setTimeout(() => setWelcomeOpen(true), 650);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const closeWelcome = useCallback(() => {
+    setWelcomeOpen(false);
+    localStorage.setItem(WELCOME_KEY, "1");
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("lang", lang);
@@ -78,18 +95,20 @@ export default function App() {
     });
   }, []);
 
+  // returns whether the ZIP resolved, so callers like the welcome modal know to close
   const handleZip = useCallback(
     async (zip: string) => {
       if (zip.length !== 5) {
         setError(t.hero.zipError);
-        return;
+        return false;
       }
       const hit = await lookupZip(zip);
       if (!hit) {
         setError(t.hero.zipError);
-        return;
+        return false;
       }
       applyOrigin({ lat: hit.lat, lng: hit.lng, label: `${zip} · ${hit.city}, ${hit.state}` });
+      return true;
     },
     [applyOrigin, t],
   );
@@ -155,6 +174,16 @@ export default function App() {
         <Register t={t} />
       </main>
       <Footer t={t} total={STATS.total} />
+
+      {welcomeOpen && (
+        <WelcomeModal
+          t={t}
+          locating={locating}
+          onZipSubmit={handleZip}
+          onUseLocation={handleLocate}
+          onClose={closeWelcome}
+        />
+      )}
     </>
   );
 }
