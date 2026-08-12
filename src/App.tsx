@@ -20,8 +20,6 @@ import WelcomeModal from "./components/WelcomeModal";
 
 const centers = centersData as Center[];
 
-const WELCOME_KEY = "gem-welcome-seen";
-
 const STATS = {
   total: centers.length,
   receiving: centers.filter((c) => c.status === "receiving").length,
@@ -43,18 +41,14 @@ export default function App() {
 
   const t = copy[lang];
 
-  // First visit gets an intent prompt. `?welcome=1` forces it back for demos.
+  // Every visit opens with the intent prompt, including refreshes. The short delay
+  // lets the hero paint first so the panel reads as an entrance, not a page load.
   useEffect(() => {
-    const forced = new URLSearchParams(window.location.search).get("welcome") === "1";
-    if (!forced && localStorage.getItem(WELCOME_KEY)) return;
     const timer = setTimeout(() => setWelcomeOpen(true), 650);
     return () => clearTimeout(timer);
   }, []);
 
-  const closeWelcome = useCallback(() => {
-    setWelcomeOpen(false);
-    localStorage.setItem(WELCOME_KEY, "1");
-  }, []);
+  const closeWelcome = useCallback(() => setWelcomeOpen(false), []);
 
   useEffect(() => {
     localStorage.setItem("lang", lang);
