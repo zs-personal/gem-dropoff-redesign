@@ -25,7 +25,10 @@ jobs:
           node-version: 20
           cache: npm
 
-      - run: npm ci
+      # audit/funding metadata calls have hung this step for 8+ minutes before
+      # dying with npm's "Exit handler never called!" bug, leaving a partial tree
+      - run: npm ci --no-audit --no-fund
+        timeout-minutes: 4
 
       - run: npm run build
         env:
