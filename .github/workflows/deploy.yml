@@ -20,17 +20,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # No dependency cache: the tree installs in ~1s, so it bought nothing and
-      # only added a subsystem that could stall.
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+          cache: npm
 
-      # `npm ci` hangs on this runner with no output and no clear cause, so this
-      # takes the more forgiving install path and logs every fetch, which names
-      # the stalling package if it happens again.
-      - run: npm install --no-audit --no-fund --loglevel http
-        timeout-minutes: 4
+      - run: npm ci
+        timeout-minutes: 5
 
       - run: npm run build
         env:
